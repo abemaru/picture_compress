@@ -1,0 +1,10 @@
+version: '3'
+services:
+  python3:
+    build: .
+    container_name: 'compress_picture'
+    working_dir: '/root/'
+    tty: true
+    volumes:
+      - ./pic:/root/pic
+      - ./src:/root/src
