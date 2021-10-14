@@ -1,8 +1,18 @@
-from PIL import Image, ImageFilter
+from PIL import Image
 import glob
 import re
 
 files = glob.glob('../pic/input/*.JPG')
+
+
+def compress_image(target_url):
+    '''compress single image
+    '''
+
+    image = Image.open(target_url)
+    width, height = image.size
+    resized_image = image.resize((width//2, height//2), Image.LANCZOS)
+    return resized_image
 
 
 def compress_multiple_images():
@@ -11,11 +21,8 @@ def compress_multiple_images():
 
     for pic in files:
         print(pic)
-        image = Image.open(pic)
-        width, height = image.size
         file_name = re.findall('input/(.*).JPG', pic)[0]
-
-        resized_image = image.resize((width//2, height//2), Image.LANCZOS)
+        resized_image = compress_image(pic)
         resized_image.save(f"../pic/output/{file_name}_resized.JPG")
 
 
