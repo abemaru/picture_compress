@@ -1,6 +1,8 @@
 import streamlit as st
 from PIL import Image
 
+from compress import compress_image
+
 def main():
     '''streamlit app that compress uploaded image.
     '''
@@ -12,8 +14,9 @@ def main():
         st.write("Upload a .jpg file to get started")
         return
 
-    uploaded_image = Image.open(uploaded_file)
-    st.image(uploaded_image)
+    resized_image = compress_image(uploaded_file)
+    st.image(resized_image)
+
 
 if __name__ == '__main__':
     main()
